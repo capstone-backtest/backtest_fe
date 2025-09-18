@@ -1,85 +1,11 @@
-import React, { useState } from 'react';
-import { register } from '@/features/auth/services/auth';
-import { Button } from "@/shared/ui/button";
-import { Input } from "@/shared/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
-import { Label } from "@/shared/ui/label";
+import React from 'react';
 
-const SignupPage: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const [done, setDone] = useState(false);
-
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    try {
-      await register({ username, email, password });
-      setDone(true);
-    } catch (err: any) {
-      setError(err?.message || '회원가입에 실패했습니다.');
-    }
-  };
-
-  return (
-    <div className="container mx-auto px-4 max-w-md py-10">
-      <Card>
-        <CardHeader>
-          <CardTitle>회원가입</CardTitle>
-        </CardHeader>
-        <CardContent>
-          {done ? (
-            <div className="p-4 bg-green-50 border border-green-200 rounded text-green-800">
-              가입이 완료되었습니다. 로그인 해 주세요.
-            </div>
-          ) : (
-            <form onSubmit={onSubmit} className="space-y-4">
-              {error && (
-                <div className="p-3 bg-destructive/10 border border-destructive/20 text-destructive rounded">
-                  {error}
-                </div>
-              )}
-              <div className="space-y-2">
-                <Label htmlFor="username">사용자명</Label>
-                <Input 
-                  id="username"
-                  placeholder="사용자명을 입력하세요" 
-                  value={username} 
-                  onChange={e => setUsername(e.target.value)} 
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">이메일</Label>
-                <Input 
-                  id="email"
-                  type="email" 
-                  placeholder="이메일을 입력하세요" 
-                  value={email} 
-                  onChange={e => setEmail(e.target.value)} 
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">비밀번호</Label>
-                <Input 
-                  id="password"
-                  type="password" 
-                  placeholder="비밀번호(8자 이상)를 입력하세요" 
-                  value={password} 
-                  onChange={e => setPassword(e.target.value)} 
-                />
-              </div>
-              <Button type="submit" className="w-full">
-                가입하기
-              </Button>
-            </form>
-          )}
-        </CardContent>
-      </Card>
-    </div>
-  );
-};
+const SignupPage: React.FC = () => (
+  <div className="container mx-auto px-4 max-w-md py-10">
+    <h1 className="text-2xl font-semibold">회원가입 (비활성화됨)</h1>
+    <p className="mt-4 text-muted-foreground">회원가입 기능은 현재 비활성화되어 있습니다.</p>
+  </div>
+);
 
 export default SignupPage;
 
