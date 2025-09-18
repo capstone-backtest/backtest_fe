@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  frontend-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    image: backtest-frontend:dev
+    volumes:
+      - ./:/app:delegated
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+      - API_PROXY_TARGET=http://backend:8001
+    stdin_open: true
+    tty: true
+
+  frontend-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        RUN_TESTS: "false"
+    image: backtest-frontend:prod
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
+    networks:
+      - backtest-net
+
+networks:
+  backtest-net:
+    external: true
+    name: backtest-network
