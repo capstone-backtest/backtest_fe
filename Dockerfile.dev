@@ -15,7 +15,8 @@ COPY . .
 
 ENV NODE_ENV=development
 
-EXPOSE 5174
+EXPOSE 5173
 
-# Default command for development
+# Default command for development (start Vite on port 5173)
+ENV PORT=5173
 CMD ["npm", "run", "dev"]
