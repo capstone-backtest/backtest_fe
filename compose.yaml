@@ -28,6 +28,7 @@ services:
       - "8080:80"
     environment:
       - NODE_ENV=production
+      - API_PROXY_TARGET=http://backend:8001
     networks:
       - backtest-net
 

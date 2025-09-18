@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { BarChart3, Github, Menu, MoonStar, Palette, SunMedium } from 'lucide-react';
 import { useTheme } from '@/shared/hooks/useTheme';

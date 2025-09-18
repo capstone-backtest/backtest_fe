@@ -7,10 +7,14 @@ ARG RUN_TESTS=false
 WORKDIR /app
 
 # Copy only package manifests first to leverage Docker layer caching
-COPY package.json package-lock.json ./
+COPY package*.json ./
 
-# Install dependencies in CI-friendly mode and avoid optional installations to improve determinism
-RUN npm ci --no-audit --prefer-offline --no-fund
+# Install dependencies in CI-friendly mode when lockfile exists, otherwise fall back to npm install
+RUN if [ -f package-lock.json ]; then \
+			npm ci --no-audit --prefer-offline --no-fund; \
+		else \
+			npm install --no-audit --prefer-offline --no-fund; \
+		fi
 
 # Copy rest of sources
 COPY . .
